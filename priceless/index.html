@@ -41,6 +41,10 @@ h1 em{color:var(--clay);font-style:italic}
 .art svg{position:absolute;inset:0;width:100%;height:100%}
 .art .tag{position:absolute;left:18px;bottom:18px;right:18px;background:rgba(255,250,243,.94);border-radius:16px;padding:14px 16px;font-size:13px;color:var(--muted)}
 .art .tag b{color:var(--ink);font-size:15px;display:block}
+.art img,.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ph img{transition:transform .6s ease}.ph:hover img{transform:scale(1.04)}
+.ph.empty{background:#efe2cf;border:2px dashed #e0c7a6}
+.ph.empty span{top:50%;bottom:auto;transform:translateY(-50%);background:none;text-align:center;color:#8a3b1b}
 
 section{max-width:1080px;margin:0 auto;padding:56px 20px}
 h2{font-family:"Cormorant Garamond",serif;font-size:clamp(32px,5vw,46px);font-weight:600;line-height:1.05;margin-bottom:8px}
@@ -73,7 +77,7 @@ h2{font-family:"Cormorant Garamond",serif;font-size:clamp(32px,5vw,46px);font-we
 .panel p{color:var(--muted);margin:6px 0 16px}
 .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 @media(max-width:700px){.gallery{grid-template-columns:repeat(2,1fr)}}
-.ph{border-radius:22px;aspect-ratio:3/4;position:relative;overflow:hidden}
+.ph{border-radius:22px;aspect-ratio:4/5;position:relative;overflow:hidden}
 .ph:nth-child(3n+2){margin-top:28px}
 @media(max-width:700px){.ph:nth-child(3n+2){margin-top:0}.ph:nth-child(2n){margin-top:28px}}
 .ph span{position:absolute;left:10px;right:10px;bottom:10px;background:rgba(255,250,243,.94);border-radius:12px;padding:8px 10px;font-size:13px;font-weight:700;color:var(--ink)}
@@ -102,6 +106,9 @@ footer{text-align:center;color:var(--muted);font-size:13px;padding:30px 20px 90p
 .sticky{position:fixed;left:12px;right:12px;bottom:12px;display:none;gap:10px;z-index:9}
 .sticky a{flex:1;text-align:center}
 @media(max-width:640px){.sticky{display:flex}}
+/* PLACEHOLDER photos: remove the .sample badges once Priceless's own photos are in. */
+.sample,.ph span.sample{position:absolute;top:10px;left:10px;right:auto;bottom:auto;background:rgba(43,29,20,.72);color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 8px;border-radius:999px;z-index:1}
+.art .sample{left:50%;transform:translateX(-50%);top:22px}
 </style>
 </head>
 <body>
@@ -127,37 +134,34 @@ footer{text-align:center;color:var(--muted);font-size:13px;padding:30px 20px 90p
       <div><strong>6am</strong>early Saturday starts</div>
     </div>
   </div>
-  <div class="art" aria-hidden="true">
-    <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice">
-      <g fill="none" stroke="#f3d2b3" stroke-width="10" stroke-linecap="round" opacity=".55">
-        <path d="M120 -10 C 170 60, 70 120, 120 190 S 70 320, 120 390 S 70 520, 120 560"/>
-        <path d="M120 -10 C 70 60, 170 120, 120 190 S 170 320, 120 390 S 170 520, 120 560"/>
-        <path d="M200 -10 C 250 60, 150 120, 200 190 S 150 320, 200 390 S 150 520, 200 560"/>
-        <path d="M200 -10 C 150 60, 250 120, 200 190 S 250 320, 200 390 S 250 520, 200 560"/>
-        <path d="M280 -10 C 330 60, 230 120, 280 190 S 230 320, 280 390 S 230 520, 280 560"/>
-        <path d="M280 -10 C 230 60, 330 120, 280 190 S 330 320, 280 390 S 330 520, 280 560"/>
-      </g>
-    </svg>
-    <div class="tag"><b>Your best photos go here</b>Pulled from your Instagram and Google — real work sells.</div>
+  <div class="art">
+    <!-- PLACEHOLDER: replace with Priceless's own photo (4:5) -->
+    <img src="images/boho-knotless-copper.jpg" alt="Boho knotless braids with copper curls">
+    <span class="sample">Sample photo</span>
+    <div class="tag"><b>Boho knotless, copper curls</b>Your best work goes here — pulled from your Instagram.</div>
   </div>
 </div>
 
 <section id="styles">
   <h2>Style gallery</h2>
-  <p class="sub">Browse recent work — every tile becomes a real photo from your Instagram.</p>
+  <p class="sub">Browse recent work — every sample photo is swapped for your own from Instagram.</p>
   <div class="gallery" aria-label="Sample hairstyles">
-    <div class="ph g1"><span>Knotless Box Braids<small>Regular · mid-back</small></span></div>
-    <div class="ph g2"><span>Boho Knotless<small>Human hair curls</small></span></div>
-    <div class="ph g3"><span>Small Tribal Braids<small>Fulani-inspired</small></span></div>
-    <div class="ph g4"><span>Goddess Box Braids<small>Curly ends</small></span></div>
-    <div class="ph g5"><span>Senegalese Twist<small>Knotless · medium</small></span></div>
+    <!-- PLACEHOLDER photos (sample only): swap each file in priceless/images/ for Priceless's own work, then delete the .sample badges -->
+    <figure class="ph"><img src="images/knotless-auburn.jpg" alt="Knotless Box Braids, Regular · mid-back" width="960" height="1200" loading="lazy"><span class="sample">Sample photo</span><span>Knotless Box Braids<small>Regular · mid-back</small></span></figure>
+    <figure class="ph"><img src="images/boho-knotless-copper.jpg" alt="Boho Knotless, Human hair curls" width="960" height="1200" loading="lazy"><span class="sample">Sample photo</span><span>Boho Knotless<small>Human hair curls</small></span></figure>
+    <figure class="ph"><img src="images/stitch-cornrows.jpg" alt="Stitch Braids, Fulani-inspired" width="960" height="1200" loading="lazy"><span class="sample">Sample photo</span><span>Stitch Braids<small>Fulani-inspired</small></span></figure>
+    <figure class="ph"><img src="images/boho-knotless-black.jpg" alt="Goddess Box Braids, Curly ends" width="960" height="1200" loading="lazy"><span class="sample">Sample photo</span><span>Goddess Box Braids<small>Curly ends</small></span></figure>
+    <figure class="ph"><img src="images/senegalese-twists.jpg" alt="Senegalese Twist, Knotless · medium" width="960" height="1200" loading="lazy"><span class="sample">Sample photo</span><span>Senegalese Twist<small>Knotless · medium</small></span></figure>
     <div class="ph g6"><span>Kids Braids<small>Gentle &amp; neat</small></span></div>
-    <div class="ph g3"><span>Large Knotless<small>Adults · about 2 hrs</small></span></div>
-    <div class="ph g1"><span>Knotless Senegalese<small>Medium twists</small></span></div>
-    <div class="ph g5"><span>Box Braids<small>Classic individuals</small></span></div>
-    <div class="ph g2"><span>Goddess Knotless<small>Human hair curls</small></span></div>
-    <div class="ph g6"><span>Closure Quick Weave<small>About 2 hrs</small></span></div>
-    <div class="ph g4"><span>Your next style<small>Room for another photo</small></span></div>
+    <figure class="ph"><img src="images/boho-knotless-honey.jpg" alt="Goddess Knotless, Human hair curls" width="960" height="1200" loading="lazy"><span class="sample">Sample photo</span><span>Goddess Knotless<small>Human hair curls</small></span></figure>
+    <figure class="ph"><img src="images/passion-twists.jpg" alt="Passion Twists, Light &amp; springy" width="960" height="1200" loading="lazy"><span class="sample">Sample photo</span><span>Passion Twists<small>Light &amp; springy</small></span></figure>
+    <figure class="ph"><img src="images/kinky-twist-install.jpg" alt="Kinky Twists, Install in progress" width="960" height="1200" loading="lazy"><span class="sample">Sample photo</span><span>Kinky Twists<small>Install in progress</small></span></figure>
+    <figure class="ph"><img src="images/sisterlocks-ombre.jpg" alt="Microlocs, Honey ombré ends" width="960" height="1200" loading="lazy"><span class="sample">Sample photo</span><span>Microlocs<small>Honey ombré ends</small></span></figure>
+    <figure class="ph"><img src="images/sisterlocks-classic.jpg" alt="Microlocs, Neat, even parting" width="960" height="1200" loading="lazy"><span class="sample">Sample photo</span><span>Microlocs<small>Neat, even parting</small></span></figure>
+    <figure class="ph"><img src="images/boho-locs-honey.jpg" alt="Boho Locs, Curly honey pieces" width="960" height="1200" loading="lazy"><span class="sample">Sample photo</span><span>Boho Locs<small>Curly honey pieces</small></span></figure>
+    <figure class="ph"><img src="images/boho-locs-buns.jpg" alt="Boho Locs, Space-bun finish" width="960" height="1200" loading="lazy"><span class="sample">Sample photo</span><span>Boho Locs<small>Space-bun finish</small></span></figure>
+    <div class="ph empty"><span>+ Your next style<small>Room for another photo</small></span></div>
+    <div class="ph empty"><span>+ Your next style<small>Room for another photo</small></span></div>
   </div>
 </section>
 
