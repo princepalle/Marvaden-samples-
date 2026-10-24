@@ -62,7 +62,7 @@ h2 em{color:var(--accent)}
 
 .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 @media(max-width:700px){.gallery{grid-template-columns:repeat(2,1fr)}}
-.ph{border-radius:var(--r);aspect-ratio:3/4;position:relative;overflow:hidden}
+.ph{border-radius:var(--r);aspect-ratio:4/5;position:relative;overflow:hidden}
 .gallery.stagger .ph:nth-child(3n+2){margin-top:30px}
 @media(max-width:700px){.gallery.stagger .ph:nth-child(3n+2){margin-top:0}.gallery.stagger .ph:nth-child(2n){margin-top:30px}}
 .ph span{position:absolute;left:10px;right:10px;bottom:10px;background:color-mix(in srgb,var(--card) 94%,transparent);border-radius:14px;padding:8px 11px;font-size:13px;font-weight:700}
@@ -73,6 +73,11 @@ h2 em{color:var(--accent)}
 .p3{background:conic-gradient(from 120deg,var(--hi),var(--a1),var(--a2),var(--hi))}
 .p4{background:repeating-linear-gradient(45deg,var(--soft) 0 12px,color-mix(in srgb,var(--soft) 70%,var(--a1)) 12px 24px)}
 .p5{background:radial-gradient(circle at 50% 36%,var(--soft) 0 26%,var(--a1) 27% 100%)}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.ph:hover img{transform:scale(1.04)}
+.ph.empty{background:var(--bg2);border:2px dashed color-mix(in srgb,var(--accent) 30%,var(--line))}
+.ph.empty span{top:50%;bottom:auto;transform:translateY(-50%);background:none;text-align:center;color:var(--accent-d)}
+.art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 
 .menu{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
 @media(max-width:700px){.menu{grid-template-columns:1fr}}
@@ -149,7 +154,24 @@ const SITE = {
   address: "5990 Arapaho Rd · Dallas, TX 75248",
   mapQuery: "5990 Arapaho Rd Dallas TX 75248",
   hours: [["Every day","By appointment"],["Last-minute?","Call to check"]],
-  styles: [["Tree Braids","Full, natural volume"],["Knotless Braids","Any size & length"],["Box Braids","Classic & neat"],["Kids Braids","Patient & gentle"],["Boho Styles","Soft curly ends"],["Take-Down","Careful removal"]],
+  heroPhoto: "images/boho-knotless-honey.jpg", heroTag: ["Boho knotless, honey brown", "Recent work by Mrs. B."],
+  gallerySub: "Recent work from the chair — tap a style when you book so Mrs. B knows the look.",
+  // [style, detail, photo]. Photos are 960x1200 (4:5). Swap a file, or add a row, to update the gallery.
+  styles: [
+    ["Knotless Braids","Auburn · mid-back","images/knotless-auburn.jpg"],
+    ["Boho Knotless","Copper curly ends","images/boho-knotless-copper.jpg"],
+    ["Boho Knotless","Long, soft curls","images/boho-knotless-black.jpg"],
+    ["Passion Twists","Light & springy","images/passion-twists.jpg"],
+    ["Senegalese Twists","Sleek middle part","images/senegalese-twists.jpg"],
+    ["Stitch Cornrows","Clean straight-backs","images/stitch-cornrows.jpg"],
+    ["Microlocs","Honey ombré ends","images/sisterlocks-ombre.jpg"],
+    ["Microlocs","Neat, even parting","images/sisterlocks-classic.jpg"],
+    ["Boho Locs","Curly honey pieces","images/boho-locs-honey.jpg"],
+    ["Boho Locs","Space-bun finish","images/boho-locs-buns.jpg"],
+    ["Kinky Twists","Install in progress","images/kinky-twist-install.jpg"],
+    ["Boho Knotless","Honey brown","images/boho-knotless-honey.jpg"]
+  ],
+  emptySlots: 3,               // dashed "room for another photo" tiles after the gallery
   services: [["Tree Braids","About 6¾ hrs","$300"],["Braid Take-Down","About 2½ hrs","$100","and up"],["Knotless Braids","Priced by size & length","Ask"],["Box Braids","Priced by size & length","Ask"],["Kids Braids","Patient, gentle styling","Ask"],["Not sure yet?","Ask if your hair is long enough first","Ask"]],
   priceNote: "Tree braid and take-down prices come from the salon's public booking page. Call for a quote on other styles.",
   products: [["oil","B Hair Oil","Mrs. B's own scalp & hair oil","$25"],["bonnet","Satin Bonnet","Protects braids overnight","$10"],["jar","Edge Control","Soft hold, no flakes","$12"],["hair","Braiding Hair","Pre-stretched, lightweight","$8"]],
@@ -173,10 +195,12 @@ ${SITE.sample ? `<div class="ribbon">Sample design by <b>Marvaden Studio</b> · 
   <div class="cta"><a class="btn" href="#services">See styles &amp; prices</a><a class="btn ghost" href="tel:${SITE.tel}">Call ${SITE.phone}</a></div>
   <div class="stats"><div><strong>${SITE.rating}★</strong>Google rating</div><div><strong>${SITE.reviews}</strong>happy reviews</div><div><strong>${SITE.statLabel[0]}</strong>${SITE.statLabel[1]}</div></div>
 </div>
-<div class="art ${SITE.heroShape}" aria-hidden="true">${braidSVG}<div class="tag"><b>Your best photo goes here</b>Pulled from your Instagram and Google — real work sells.</div></div></div></div>
+<div class="art ${SITE.heroShape}">${SITE.heroPhoto ? `<img src="${SITE.heroPhoto}" alt="${SITE.heroTag[0]}">` : braidSVG}<div class="tag"><b>${SITE.heroPhoto ? SITE.heroTag[0] : "Your best photo goes here"}</b>${SITE.heroPhoto ? SITE.heroTag[1] : "Pulled from your Instagram and Google — real work sells."}</div></div></div></div>
 
-<section id="styles"><h2>Style <em>gallery</em></h2><p class="sub"><span class="pinkdot"></span>Browse recent work — every tile becomes a real photo from your Instagram.</p>
-<div class="gallery ${SITE.gallery}">${SITE.styles.map((s,i)=>`<div class="ph p${i%6}"><span>${s[0]}<small>${s[1]}</small></span></div>`).join("")}</div></section>
+<section id="styles"><h2>Style <em>gallery</em></h2><p class="sub"><span class="pinkdot"></span>${SITE.gallerySub || "Browse recent work — every tile becomes a real photo from your Instagram."}</p>
+<div class="gallery ${SITE.gallery}">${SITE.styles.map((s,i)=>s[2]
+  ? `<figure class="ph"><img src="${s[2]}" alt="${s[0]}, ${s[1]}" width="960" height="1200" loading="lazy"><span>${s[0]}<small>${s[1]}</small></span></figure>`
+  : `<div class="ph p${i%6}"><span>${s[0]}<small>${s[1]}</small></span></div>`).join("")}${"<div class=\"ph empty\"><span>+ Your next style<small>Room for another photo</small></span></div>".repeat(SITE.emptySlots || 0)}</div></section>
 
 <section id="services" style="padding-top:0"><h2>Styles &amp; <em>prices</em></h2><p class="sub">Clear prices up front — no surprises at the end of your appointment.</p>
 <div class="menu">${SITE.services.map(s=>`<div class="item"><div><h3>${s[0]}</h3><p>${s[1]}</p></div><div class="price">${s[2]}${s[3]?`<small>${s[3]}</small>`:""}</div></div>`).join("")}</div>
